@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenShield</title>
+     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(125deg, rgb(255, 255, 255), rgb(255, 153, 43));
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+
+
+        #container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        #leftPanel {
+            width: 30%;
+            background-color: #fff;
+            color: #333;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 15px 0 0 15px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+            #threatLevel {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            transition: background-color 0.5s, color 0.5s;
+             background-color: transparent;
+            color: #333;
+            z-index: 2;
+            position: relative;
+        }
+
+        #threatLevelFill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            border-radius: 15px 0 0 15px;
+            transition: height 0.5s ease-in-out, background-color 0.5s ease-in-out;
+            z-index: 1;
+
+        }
+
+        #mainContent {
+            width: 70%;
+            padding: 40px;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 0 15px 15px 0;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #666;
+        }
+            button {
+            background-color: #FF992B;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+             width: 100%;
+        }
+
+         button:hover {
+            background-color: #FF992B;
+        }
+       #bottone1, #bottone2 {
+            padding-left: 33px;
+            padding-right: 33px;
+            padding-bottom: 16px;
+            padding-top: 16px;
+            border-radius: 9px;
+            background: #FF992B; 
+            border: none;
+            font-family: inherit;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        #bottone1:hover, #bottone2:hover {
+            box-shadow: 7px 5px 56px -14px #FF9A00; /* Shadow effect */
+        }
+
+        #bottone1:active, #bottone2:active {
+            transform: scale(1.1);
+            box-shadow: 7px 5px 56px -10px #FF992B;
+        }
+
+        #stopButton {
+            background-color: #ff3333;
+            margin-top: 20px;
+        }
+
+        video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1)
+            width: 100%;
+            max-height: 300px;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        #threatLogs {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 1200px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        #threatLogs h3 {
+            color: #333;
+        }
+
+        #logList {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        #logList img {
+            max-width: 100px;
+            height: auto;
+            margin-left: 10px;
+            border-radius: 8px;
+        }
+
+        #statsSection {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #statsSection h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #statsSection .stat {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 8px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        #statsSection .stat strong {
+            color: #ED7A00;
+        }
+
+        @media screen and (max-width: 768px) {
+            #container {
+                flex-direction: column;
+                   width: 100%;
+            }
+
+           #leftPanel, #mainContent {
+        width: 100%;
+        padding: 20px;
+        border-radius: 0;
+        text-align: center;
+    }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="leftPanel">
+            <p id="threatLevel">No soil found</p>
+            <div id="threatLevelFill"></div>
+        </div>
+        <div id="mainContent">
+            <h1>Soil detection</h1>
+            <button id="bottone1" onclick="initWebcam()">Use webcam</button>
+            <button id="bottone2" onclick="initScreenCapture()">Use screen capture</button>
+            <video id="videoSource" autoplay muted></video>
+            <button id="stopButton" onclick="stopStream()">Stop</button>
+            <div id="output">Predictions will appear here...</div>
+        </div>
+    </div>
+    <div id="threatLogs">
+        <h3>Soil log</h3>
+        <div id="logList">Soil entries will appear here...</div>
+    </div>
+
+    <div id="statsSection">
+        <h3>Soil statistics</h3>
+        <div class="stat">
+            <strong>Soils detected:</strong>
+            <span id="threatCount">0</span>
+        </div>
+        <div class="stat">
+            <strong>Max. soil probability:</strong>
+            <span id="maxProbability">0%</span>
+        </div>
+        <div class="stat">
+            <strong>Average soil probability:</strong>
+            <span id="avgProbability">0%</span>
+        </div>
+        <div class="stat">
+            <strong>Common soil:</strong>
+            <span id="mostFrequentPlant">No data</span>
+        </div>
+    </div>
+
+    <!-- Map -->
+    <div id="map"></div>
+
+    <script>
+        const URL = "https://teachablemachine.withgoogle.com/models/LOtTSTOL0/";
+
+        let model, webcam, labelContainer, maxPredictions;
+        const highRiskClasses = ["Dark soil", "Red soil", "Grey soil", "Sand", "Saline", "Chestnut soil","No soil"];
+        const threatLogs = [];
+        let lastThreatDetected = false;
+        let totalThreats = 0;
+        let maxThreatProbability = 0;
+        let totalProbability = 0;
+        let plantCounts = {};	
+
+        let map, threatMarker;
+
+        async function loadModel() {
+            try {
+                model = await tmImage.load(modelURL, metadataURL);
+                console.log("Model loaded successfully");
+            } catch (error) {
+                console.error("Error loading model: ", error);
+                alert("Failed to load the model. Check the model URL.");
+            }
+        }
+
+        async function initWebcam() {
+            try {
+                const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+              model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+                videoElement = document.getElementById("videoSource");
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoElement.srcObject = stream;
+                currentStream = stream;
+                startPredictionLoop();
+            } catch (error) {
+                console.error("Error accessing webcam: ", error);
+                alert("Error: Unable to access the webcam.");
+            }
+        }
+
+        async function initScreenCapture() {
+            try {
+                videoElement = document.getElementById("videoSource");
+                const screenStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+                videoElement.srcObject = screenStream;
+                currentStream = screenStream;
+                startPredictionLoop();
+            } catch (error) {
+                console.error("Error capturing screen: ", error);
+                alert("Error: Unable to capture the screen.");
+            }
+        }
+
+        async function startPredictionLoop() {
+            if (!model) {
+                await loadModel();
+            }
+
+            videoElement.addEventListener("loadeddata", analyzeFrame);
+        }
+
+        async function analyzeFrame() {
+            if (model && videoElement.readyState >= 2) {
+                const predictions = await model.predict(videoElement);
+                displayPredictions(predictions);
+                updateThreatLevel(predictions);
+                requestAnimationFrame(analyzeFrame);
+            }
+        }
+
+        function displayPredictions(predictions) {
+            const outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = predictions
+                .map(prediction => `${prediction.className}: ${(prediction.probability * 100).toFixed(2)}%`)
+                .join("<br>");
+        }
+
+        function updateThreatLevel(predictions) {
+            const threatLevelElement = document.getElementById("threatLevel");
+            const threatLevelFill = document.getElementById("threatLevelFill");
+
+            let threatDetected = false;
+            let threatProbability = 0;
+
+            predictions.forEach(prediction => {
+                if (highRiskClasses.includes(prediction.className) && prediction.probability > 0.95) {
+                    threatDetected = true;
+                    threatProbability = Math.max(threatProbability, prediction.probability);
+                    logThreat(prediction.className, prediction.probability);
+                   
+                }
+            });
+             
+            if (threatDetected && !lastThreatDetected) {
+    lastThreatDetected = true;
+} else if (!threatDetected) {
+    lastThreatDetected = false;
+}
+              threatLevelElement.style.position = 'relative';
+    threatLevelElement.style.zIndex = '2'; 
+ 
+           if (threatDetected) {
+        threatLevelElement.innerHTML = "Soil discovered!";
+        threatLevelElement.style.color = "#fff";
+        threatLevelFill.style.height = `${threatProbability * 100}%`;
+        threatLevelFill.style.background = "linear-gradient(to bottom, #ffffff, #8B4513)";
+        threatLevelFill.style.zIndex = '1';
+    } else {
+        threatLevelElement.innerHTML = "No soil found";
+        threatLevelElement.style.color = "#333";
+        threatLevelFill.style.height = "0%";
+        threatLevelFill.style.background = "linear-gradient(to bottom, #ffffff, #FFA500)";
+        threatLevelFill.style.zIndex = '1';
+    }
+}
+
+        function logThreat(className, probability) {
+            if (lastThreatDetected) {
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const logEntry = {
+                    time: new Date().toLocaleString(),
+                    className: className,
+                    probability: probability,
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                };
+                threatLogs.unshift(logEntry);  // Add new threat to the beginning
+                updateLogDisplay();
+                updateMap(logEntry.latitude, logEntry.longitude);
+                
+
+                totalThreats++;
+                totalProbability += probability;
+                maxThreatProbability = Math.max(maxThreatProbability, probability);
+
+                // Track the frequency of each plant
+                if (plantCounts[className]) {
+                    plantCounts[className]++;
+                } else {
+                    plantCounts[className] = 1;
+                }
+
+                updateStats();
+                 captureScreenshot(logEntry);
+
+            });
+        }
+
+        function updateLogDisplay() {
+            const logList = document.getElementById("logList");
+            logList.innerHTML = threatLogs
+                .map(log => `<div>${log.time} - ${log.className} (${(log.probability * 100).toFixed(2)}%) at Lat: ${log.latitude}, Lon: ${log.longitude}</div>`)
+                .join("");
+        }
+
+        function updateMap(lat, lon) {
+            if (!map) {
+                map = L.map('map').setView([lat, lon], 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+                L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map); // Satellite Layer
+            }
+
+            if (threatMarker) {
+                threatMarker.setLatLng([lat, lon]);
+            } else {
+                threatMarker = L.marker([lat, lon]).addTo(map);
+            }
+        }
+
+function captureScreenshot(logEntry) {
+  if (!videoElement || videoElement.readyState < 2) {
+    console.error("Video element is not ready for capturing screenshot.");
+}
+
+
+
+    const canvas = document.createElement("canvas");
+    canvas.width = videoElement.videoWidth || 740;
+    canvas.height = videoElement.videoHeight || 520;
+
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+    canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        logEntry.screenshot = url;
+        displayScreenshot(logEntry); // Display screenshot after capture
+    }, "image/png");
+}
+
+    function displayScreenshot(logEntry) {
+    const logList = document.getElementById("logList");
+    const logEntryDiv = document.createElement("div");
+    logEntryDiv.innerHTML = `
+        <div>
+            ${logEntry.time} - ${logEntry.className} (${(logEntry.probability * 100).toFixed(2)}%)
+            at Lat: ${logEntry.latitude}, Lon: ${logEntry.longitude}
+        </div>
+        <img src="${logEntry.screenshot}" alt="Screenshot" style="max-width: 100px; border-radius: 8px; margin: 10px 0;">
+    `;
+    logList.prepend(logEntryDiv); // Добавляем запись в начало списка
+}
+
+       function updateStats() {
+    threatCount.innerText = totalThreats || 0;
+    maxProbability.innerText = `${(maxThreatProbability * 100).toFixed(2)}%`;
+    avgProbability.innerText = totalThreats > 0 
+        ? `${(totalProbability / totalThreats * 100).toFixed(2)}%` 
+        : "0%";
+    mostFrequentPlant.innerText = Object.keys(plantCounts).length > 0 
+        ? Object.keys(plantCounts).reduce((a, b) => plantCounts[a] > plantCounts[b] ? a : b) 
+        : "Нет данных";
+}
+
+
+        function stopStream() {
+            if (currentStream) {
+                const tracks = currentStream.getTracks();
+                tracks.forEach(track => track.stop());
+            }
+        }
+    </script>
+</body>
+</html>

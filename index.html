@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenShield</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Nunito:wght@300;600&display=swap');
+
+        body {
+.custom-shape-divider-top-1736540476 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1736540476 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 148px;
+}
+
+.custom-shape-divider-top-1736540476 .shape-fill {
+    fill: #42FF5E;
+}
+            
+.info-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    background: linear-gradient(163deg, #4CAF50 0%, #00FF75 100%);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 1rem 1rem -1.1rem rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
+}
+
+.info-box-left {
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Выравнивание по левому краю */
+    gap: 15px;
+    text-align:center;
+}
+
+.info-box-right img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-box-right img:hover {
+    transform: translateY(-10px); /* Эффект "приподнятия" изображения */
+}
+
+.button {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    padding-block: 0.5rem;
+    padding-inline: 1.25rem;
+    background-color: rgb(0, 254, 98);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffff;
+    gap: 10px;
+    font-weight: bold;
+    border: 3px solid #ffffff4d;
+    outline: none;
+    overflow: hidden;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  border-color: #fff9;
+}
+
+.button:hover .icon {
+  transform: translate(4px);
+}
+
+.button:hover::before {
+  animation: shine 1.5s ease-out infinite;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0) 70%
+  );
+  top: 0;
+  left: -100px;
+  opacity: 0.6;
+}
+
+@keyframes shine {
+  0% {
+    left: -100px;
+  }
+
+  60% {
+    left: 100%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  border-color: #fff9;
+}
+
+.button:hover .icon {
+  transform: translate(4px);
+}
+
+.button:hover::before {
+  animation: shine 1.5s ease-out infinite;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0) 70%
+  );
+  top: 0;
+  left: -100px;
+  opacity: 0.6;
+}
+
+@keyframes shine {
+  0% {
+    left: -100px;
+  }
+
+  60% {
+    left: 100%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+            font-family: 'Archivo Black', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            background: linear-gradient(125deg, rgb(159, 255, 164), rgb(255, 255, 255));
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .logo-container {
+            position: relative;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .logo-container img {
+            width: 100px; 
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.4s ease; 
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.2); 
+        }
+
+        .logo-container h1 {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #42FF5E;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .logo-container:hover h1 {
+            opacity: 1;
+            transform: translate(-50%, 10px); /* Плавное появление текста снизу */
+        }
+       
+            .new-info-card {
+            background: linear-gradient(163deg, #4CAF50 0%, #00FF75 100%);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 1rem 1rem -1.1rem #000000e1;
+            width: calc(100% - 40px);
+            max-width: 700px;
+            text-align: center;
+            margin: 50px 0;
+            color: white;
+            font-size: 1.1rem;
+            font-family: 'Nunito', sans-serif;
+            line-height: 1.6;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .new-info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 0px 30px 1px rgba(76, 175, 80, 0.4);
+        } 
+       .animated-text {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+            font-size: 1.2rem;
+            color: white;
+            font-family: "Nunito", sans-serif;
+        }
+
+        .animated-text span {
+            display: inline-block;
+            opacity: 0;
+            filter: blur(4px);
+            transform: translateY(10px);
+        }
+
+        .animated-text span:nth-child(n) {
+        
+            animation: fade-in 0.8s forwards cubic-bezier(0.11, 0, 0.5, 0);
+        }
+
+        .animated-text span:nth-child(1) { animation-delay: 0.1s; }
+        .animated-text span:nth-child(2) { animation-delay: 0.2s; }
+        .animated-text span:nth-child(3) { animation-delay: 0.3s; }
+        .animated-text span:nth-child(4) { animation-delay: 0.4s; }
+        .animated-text span:nth-child(5) { animation-delay: 0.5s; }
+        .animated-text span:nth-child(6) { animation-delay: 0.6s; }
+        .animated-text span:nth-child(7) { animation-delay: 0.7s; }
+        .animated-text span:nth-child(8) { animation-delay: 0.8s; }
+        .animated-text span:nth-child(9) { animation-delay: 0.9s; }
+        .animated-text span:nth-child(10) { animation-delay: 1s; }
+        .animated-text span:nth-child(11) { animation-delay: 1.1s; }
+        .animated-text span:nth-child(12) { animation-delay: 1.2s; }
+        .animated-text span:nth-child(13) { animation-delay: 1.3s; }
+        .animated-text span:nth-child(14) { animation-delay: 1.4s; }
+        .animated-text span:nth-child(15) { animation-delay: 1.5s; }
+        .animated-text span:nth-child(16) { animation-delay: 1.6s; }
+        .animated-text span:nth-child(17) { animation-delay: 1.7s; }
+        .animated-text span:nth-child(18) { animation-delay: 1.8s; }
+        .animated-text span:nth-child(19) { animation-delay: 1.9s; }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+                filter: blur(4px);
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0);
+            }
+        }
+
+        .cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            position: relative;
+            background-color: #ECEDF2;
+            border: 2px solid #59D759;
+            border-radius: 15px;
+            width: 200px;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Все элементы начинаются сверху */
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            padding: 10px 0;
+        }
+
+        .card img {
+            width: 140px;
+            height: auto;
+            margin-bottom: 5px;
+        }
+
+        /* Увеличиваем картинку для Smart Slurp-2 */
+        .card:nth-child(2) img {
+            width: 150px;
+         
+        }
+
+        /* Увеличиваем картинку для мобильной версии */
+        .card:nth-child(3) img {
+            width: 160px;
+        }
+
+        .card h3, .card p {
+            margin: 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-top: 30px; /* Опускаем заголовки для всех карточек */
+        }
+        
+        
+
+        .card:nth-child(2) h3 {
+            margin-top: 14px;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            z-index: 2;
+        }
+
+        .cards:hover > .card:not(:hover) {
+            filter: blur(5px);
+            transform: scale(0.9);
+        }
+
+        .card .icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .card .icon img {
+            width: 100%;
+            height: auto;
+.animated-text {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+            font-size: 1.2rem;
+            color: white;
+            font-family: "Montserrat", sans-serif;
+      .fixed-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000; /* Убедитесь, что кнопка остаётся поверх других элементов */
+}
+        }
+
+         
+    </style>
+</head>
+<body>
+<div class="custom-shape-divider-top-1736540476">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>   
+</svg>
+</div>
+<div class="logo-container">
+        <img src="D:/greenshield/logo1.png" alt="GreenShield Logo">
+        <h1>GreenShield</h1>
+    </div>
+<div class="new-info-card">
+    <div class="animated-text">
+        <span><b>GreenShield</b></span>
+        <span>—</span>
+        <span>is</span>
+        <span>integrated</span>
+        <span>system,</span>
+        <span>which</span>
+        <span>helps</span>
+        <span>farmers</span>
+        <span>safely</span>
+        <span>manage</span>
+        <span>land</span>
+        <span>resources,</span>
+        <span>using</span>
+        <span>analysis</span>
+        <span>soil</span>
+        <span>and</span>
+        <span>detection</span>
+        <span>poisonous</span>
+        <span>plants.</span>
+    </div>
+</div>
+
+
+    <div class="cards">
+        <div class="card" onclick="location.href='file:///C:/Users/User/Desktop/Blurp(eng).html';">
+            <img src="D:\greenshield\drone1.png" alt="Blurp V530">
+            <div class="icon">
+                <img src="D:/greenshield/icon2.png" alt="Earth Icon">
+            </div>
+            <h3>Blurp V530</h3>
+            <p>Soil type analysis</p>
+        </div>
+
+        <div class="card" onclick="location.href='file:///C:/Users/User/Desktop/Slurp(eng).html';">
+            <img src="D:\greenshield\webdrone.png" alt="Smart Slurp-2">
+            <div class="icon">
+                <img src="D:/greenshield/icon1.png" alt="Plant Icon">
+            </div>
+            <h3>Smart Slurp-2</h3>
+            <p>Detection of poisonous plants</p>
+        </div>
+
+        <div class="card" onclick="location.href='file:///C:/Users/User/Desktop/Phone1.html';">
+            <img src="D:/greenshield/phone.png" alt="Mobile Version">
+            <h3>Mobile version</h3>
+        </div>
+    </div>
+
+<div class="info-box">
+    <div class="info-box-left">
+        <h2>GSapp</h2>
+        <p>
+            GSapp is an application that helps farmers, gardeners and tourists 
+            quickly identify poisonous plants using data analysis 
+            and geolocation technologies.
+        </p>
+        <a href="D:/greenshield/GreenShieldApp.zip" download>
+            <button class="button">
+                Download
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        fill-rule="evenodd"
+                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                        clip-rule="evenodd"
+                    ></path>
+                </svg>
+            </button>
+        </a>
+    </div>
+    <div class="info-box-right">
+        <img src="D:\greenshield\phone2.png" alt="GreenShield App">
+    </div>
+</div>
+ </body>
+</html>
+
+
+
+
+
+
+
+	
