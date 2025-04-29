@@ -313,18 +313,21 @@
             }
         }
 
-        async function initWebcam() {
-            try {
-                videoElement = document.getElementById("videoSource");
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                videoElement.srcObject = stream;
-                currentStream = stream;
-                startPredictionLoop();
-            } catch (error) {
-                console.error("Error accessing webcam: ", error);
-                alert("Error: Unable to access the webcam.");
-            }
-        }
+       async function initWebcam() {
+    try {
+        videoElement = document.getElementById("videoSource");
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: { exact: "environment" } },
+            audio: false
+        });
+        videoElement.srcObject = stream;
+        currentStream = stream;
+        startPredictionLoop();
+    } catch (error) {
+        console.error("Error accessing rear camera: ", error);
+        alert("Error: Unable to access the rear camera. Maybe it's not available on this device.");
+    }
+}
 
         async function initScreenCapture() {
             try {
