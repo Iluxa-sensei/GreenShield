@@ -468,28 +468,40 @@
             logList.innerHTML += screenshotImg;
         }
 
-        function updateStats() {
-            const threatCount = document.getElementById("threatCount");
-            const lastThreat = document.getElementById("lastThreat");
-            const maxProbability = document.getElementById("maxProbability");
-            const avgProbability = document.getElementById("avgProbability");
-            const mostFrequentPlant = document.getElementById("mostFrequentPlant");
+         function updateStats() {
+            document.getElementById("threatCount").textContent = totalThreats;
+            document.getElementById("lastThreat").textContent = threatLogs[0]?.className || "No threat";
+            document.getElementById("maxProbability").textContent = `${(maxThreatProbability * 100).toFixed(2)}%`;
+            document.getElementById("avgProbability").textContent = totalThreats > 0 
+                ? `${((totalProbability / totalThreats) * 100).toFixed(2)}%`
+                : "0%";
 
-            threatCount.innerText = totalThreats;
-            lastThreat.innerText = lastThreatDetected ? "Yes" : "No";
-            maxProbability.innerText = `${(maxThreatProbability * 100).toFixed(2)}%`;
-            avgProbability.innerText = `${(totalProbability / totalThreats * 100).toFixed(2)}%`;
-
-            let frequentPlant = Object.keys(plantCounts).reduce((a, b) => plantCounts[a] > plantCounts[b] ? a : b);
-            mostFrequentPlant.innerText = frequentPlant || "No data";
+            // Определим наиболее часто встречающееся растение
+            let mostFrequent = "No data";
+            let maxCount = 0;
+            for (let plant in plantCounts) {
+                if (plantCounts[plant] > maxCount) {
+                    mostFrequent = plant;
+                    maxCount = plantCounts[plant];
+                }
+            }
+            document.getElementById("mostFrequentPlant").textContent = mostFrequent;
         }
 
         function stopStream() {
             if (currentStream) {
                 const tracks = currentStream.getTracks();
                 tracks.forEach(track => track.stop());
+                currentStream = null;
+            }
+
+            if (videoElement) {
+                videoElement.srcObject = null;
             }
         }
+
+        // Инициализация модели при загрузке страницы
+        window.onload = loadModel;
     </script>
 </body>
 </html>
