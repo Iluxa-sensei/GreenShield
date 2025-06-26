@@ -1,7 +1,7 @@
 ## GreenShield Web Platform
 
 GreenShield is an environmental monitoring project focused on detecting poisonous plants and analyzing soil types using drone imagery, AI models, and geolocation data. This repository contains the source code for the GreenShield web platform, which serves as a visualization and analytics interface for environmental data collected through the system.
-⸻
+
 
 ## Features
  • Interactive map with geotagged plant and soil data
