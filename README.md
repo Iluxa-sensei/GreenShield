@@ -18,9 +18,16 @@ GreenShield is an environmental monitoring project focused on detecting poisonou
 ## Open Link
 [GreenShield](https://iluxa-sensei.github.io/GreenShield)
 
+## Project Structure
+├── index.html 
+├── Blurp(eng).html
+├── Slurp(eng).html 
+├── Mobile(plants).html 
+├── Mobile(soil).html 
+├── Phone1.html
+├── greenshield/ # Assets folder
+│ ├── images/ 
 
- 2. Open index.html in a browser or deploy to a static hosting service (e.g., GitHub Pages, Vercel, Netlify).
-<pre> ## Project Structure Soil-Plant-Detector/ ├── index.html # Main landing page ├── Blurp(eng).html # Plant info page (English) ├── Slurp(eng).html # Soil info page (English) ├── Mobile(plants).html # Mobile view for plants ├── Mobile(soil).html # Mobile view for soil ├── Phone1.html # General mobile entry ├── greenshield/ # Asset directory │ ├── images/ # Plant and soil illustrations │ ├── icons/ # Interface icons and logos │ └── styles/ # CSS and design resources </pre>
 ## About the Project
 
 GreenShield is designed to support agricultural monitoring and land conservation efforts. It is a part of a larger system including a drone-based image acquisition unit, a mobile app for field alerts, and an AI model backend that classifies plant species and analyzes soil conditions.
