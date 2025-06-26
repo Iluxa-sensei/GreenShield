@@ -16,11 +16,8 @@ GreenShield is an environmental monitoring project focused on detecting poisonou
  • Chart.js or D3.js (for data visualization)
  • Firebase / REST API (optional for real-time updates)
 
-## Installation
- 1. Clone the repository:
-
-git clone https://github.com/your-org/greenshield-web.git
-cd greenshield-web
+## Open Link
+[GreenShield](https://github.com/Iluxa-sensei/GreenShield.io)
 
 
  2. Open index.html in a browser or deploy to a static hosting service (e.g., GitHub Pages, Vercel, Netlify).
