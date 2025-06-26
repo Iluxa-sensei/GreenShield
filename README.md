@@ -19,14 +19,20 @@ GreenShield is an environmental monitoring project focused on detecting poisonou
 [GreenShield](https://iluxa-sensei.github.io/GreenShield)
 
 ## Project Structure
-├── index.html 
-├── Blurp(eng).html
-├── Slurp(eng).html 
-├── Mobile(plants).html 
-├── Mobile(soil).html 
-├── Phone1.html
-├── greenshield/ # Assets folder
-│ ├── images/ 
+
+```
+GreenShield/
+├── index.html             
+├── Blurp(eng).html         
+├── Slurp(eng).html         
+├── Mobile(plants).html    
+├── Mobile(soil).html       
+├── Phone1.html            
+├── greenshield/            # Asset directory
+│   ├── images/             
+
+```
+
 
 ## About the Project
 
