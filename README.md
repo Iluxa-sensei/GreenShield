@@ -23,14 +23,14 @@ GreenShield is an environmental monitoring project focused on detecting poisonou
 
 ## Project Structure
 
-├──index.html
+├── index.html 
 ├── Blurp(eng).html
-├──Mobile(plants).html
-├──Mobile(soil).html
-├──Phone1.html
-├──Slurp(eng).html
-├── greenshield/
-│   └── images, icons, etc.
+├── Slurp(eng).html 
+├── Mobile(plants).html 
+├── Mobile(soil).html 
+├── Phone1.html
+├── greenshield/ # Assets folder
+│ ├── images/ 
 
 ## About the Project
 
