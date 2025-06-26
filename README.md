@@ -43,6 +43,6 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 
 ## Contact
 
-For questions, feedback, or collaboration, open an issue or contact via GitHub: [github.com/your-username/plant-soil-detector](https://github.com/iluxa-sensei/GreenShield/issues)
+For questions, feedback, or collaboration, open an issue or contact via GitHub: [Issues](https://github.com/iluxa-sensei/GreenShield/issues)
 
 
