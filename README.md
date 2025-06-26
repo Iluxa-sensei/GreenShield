@@ -17,7 +17,7 @@ GreenShield is an environmental monitoring project focused on detecting poisonou
  • Firebase / REST API (optional for real-time updates)
 
 ## Open Link
-[GreenShield](https://github.com/Iluxa-sensei/GreenShield.io)
+[[GreenShield](https://iluxa-sensei.github.io/GreenShield)
 
 
  2. Open index.html in a browser or deploy to a static hosting service (e.g., GitHub Pages, Vercel, Netlify).
