@@ -28,8 +28,8 @@ GreenShield/
 ├── Mobile(plants).html    
 ├── Mobile(soil).html       
 ├── Phone1.html            
-├── greenshield/            # Asset directory
-│   ├── images/             
+├── greenshield/  # Asset directory
+│   └── images/             
 
 ```
 
