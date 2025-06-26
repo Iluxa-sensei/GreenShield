@@ -11,10 +11,9 @@ GreenShield is an environmental monitoring project focused on detecting poisonou
  • Responsive design, optimized for desktop and mobile
 
 ## Technology Stack
- • HTML, CSS, JavaScript
+ • HTML,  JavaScript
  • Leaflet.js (for mapping)
- • Chart.js or D3.js (for data visualization)
- • Firebase / REST API (optional for real-time updates)
+ • Chart.js  (for data visualization)
 
 ## Open Link
 [GreenShield](https://iluxa-sensei.github.io/GreenShield)
